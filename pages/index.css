@@ -1,0 +1,164 @@
+@import url('../vendor/normalize.css');
+@import url('../vendor/fonts.css');
+
+.page{
+    background-color: #000;
+    color: white;
+}
+
+.header{
+    margin: 45px auto 0;
+    max-width: 880px;
+    border-bottom: 1px solid #545454;
+}
+
+.header__logo{
+    margin-bottom: 35px;
+    max-width: 142px;
+}
+
+.profile{
+    margin: 40px auto 0;
+    max-width: 880px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile__bio{
+    display: flex;
+    align-items: center;
+}
+
+.profile__avatar{
+    max-width: 120px;
+    max-height: 120px;
+    margin: 0 30px 0 0;
+}
+
+.profile__photo{
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.profile__info{
+    display: grid;
+    grid-template-columns: 1fr 24px;
+    grid-row-gap: 16px;
+    grid-column-gap: 18px;
+    grid-template-areas: 
+        "name button"
+        "description description";
+}
+
+
+.profile__name{
+    margin: 0;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 1.14;
+    grid-area: name;
+    text-align: end;
+}
+
+.profile__description{
+    margin: 0;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.2;
+    grid-area: description;
+}
+
+.profile__edit-button{
+    border: none;
+    padding: 0;
+    background-color: #000;
+    grid-area: button;
+    align-self: flex-end;
+    max-height: 24px;
+    z-index: 3;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.profile__edit-button:hover{
+    opacity: 0.8s;
+}
+
+.profile__add-button{
+    background-color: #000;
+    border: none;
+    padding: 0;
+    max-width: 150px;
+    max-height: 50px;
+    align-self: center;
+    z-index: 3;
+}
+
+.elements{
+    margin: 50px auto 0 auto;
+    max-width: 880px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-gap: 20px;
+    grid-column-gap: 18px;
+}
+
+.element{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.element__card{
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 20px 30px 20px;
+}
+
+.element__photo{
+    width: 100%;
+}
+
+.element__description{
+    margin: 0;
+    color: #000;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.element__group{
+    background-color: white;
+    border: none;
+    padding: 0;
+    align-self: flex-end;
+    margin-left: 22px;
+}
+
+.footer{
+    max-width: 880px;
+    margin: 67px auto 60px auto;
+}
+
+.footer__author{
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.37;
+    color: #545454;
+}
