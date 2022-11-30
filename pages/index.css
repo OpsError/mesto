@@ -4,6 +4,7 @@
 .page{
     background-color: #000;
     color: white;
+    position: relative;
 }
 
 .header{
@@ -77,27 +78,129 @@
 .profile__edit-button{
     border: none;
     padding: 0;
-    background-color: #000;
+    background-color: transparent;
     grid-area: button;
-    align-self: flex-end;
+    align-self: center;
     max-height: 24px;
-    z-index: 3;
     opacity: 1;
     transition: opacity 0.5s;
 }
 
 .profile__edit-button:hover{
-    opacity: 0.8s;
+    opacity: 0.6;
 }
 
 .profile__add-button{
-    background-color: #000;
+    background-color: transparent;
     border: none;
     padding: 0;
     max-width: 150px;
     max-height: 50px;
     align-self: center;
-    z-index: 3;
+    opacity: 1;
+    transition: opacity .5s;
+}
+
+.profile__add-button:hover{
+    opacity: .6;
+}
+
+.popup{
+    display: none;
+}
+
+.popup_opened{
+    display: block;
+}
+
+.popup::before{
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background: #000;
+    position: fixed;
+    content: '';
+    opacity: 0.5;
+}
+
+.popup__container{
+    width: 430px;
+    height: 330px;
+    z-index: 2;
+    position: fixed;
+    top: calc((100% - 330px)/2);
+    left: calc((100% - 430px)/2);
+    background-color: white;
+    color: #000;
+    border-radius: 10px;
+}
+
+.popup__form{
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    margin: 36px;
+    position: relative;
+}
+
+.popup__heading{
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.2;
+    margin: 0 0 40px;
+}
+
+.popup__input{
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    padding-bottom: 13px;
+    outline: none;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+}
+
+.popup__description{
+    margin-top: 30px;
+}
+
+.popup__save{
+    margin-top: 48px;
+    background-color: #000;
+    color: white;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.2;
+    height: 50px;
+    border-radius: 2px;
+    opacity: 1;
+    transition: opacity .5s;
+}
+
+.popup__save:hover{
+    opacity: .8;
+}
+
+.popup__close{
+    background-color: transparent;
+    border: none;
+    position: fixed;
+    padding: 0;
+    margin-left: 440px;
+    margin-top: -40px;
+    opacity: 1;
+    transition: opacity .5s;
+}
+
+.popup__close:hover{
+    opacity: .6;
 }
 
 .elements{
@@ -141,12 +244,18 @@
     overflow: hidden;
 }
 
-.element__group{
+.element__like{
     background-color: white;
     border: none;
     padding: 0;
     align-self: flex-end;
     margin-left: 22px;
+    opacity: 1;
+    transition: opacity .5s;
+}
+
+.element__like:hover{
+    opacity: .5;
 }
 
 .footer{

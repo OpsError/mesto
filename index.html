@@ -12,108 +12,127 @@
         <img src="images/logo.svg" alt="" class="header__logo">
     </header>
 
-    <section class="profile">
-        <div class="profile__bio">
-            <div class="profile__avatar">
-                <img src="images/avatar.jpg" alt="Автарка профиля" class="profile__photo">
-            </div>
-
-            <div class="profile__info">
-                <h2 class="profile__name">Жак-Ив Кусто</h2>
-                <button class="profile__edit-button">
-                    <img src="./images/Edit Button.svg" alt="Редактирование профиля">
-                </button>
-                <p class="profile__description">Исследователь океана</p>
-            </div>
-        </div>
-
-        <button class="profile__add-button">
-            <img src="./images/Add Button.svg" alt="Добавить фото">
-        </button>
+    <main class="main">
         
-    </section>
-
-    <section class="elements">
-
-        <div class="element">
-
-            <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
+        <section class="profile">
+            <div class="profile__bio">
+                <div class="profile__avatar">
+                    <img src="images/avatar.jpg" alt="Автарка профиля" class="profile__photo">
+                </div>
+    
+                <div class="profile__info">
+                    <h2 class="profile__name">Жак-Ив Кусто</h2>
+                    <button class="profile__edit-button">
+                        <img src="./images/edit-button.svg" alt="Редактирование профиля">
+                    </button>
+                    <p class="profile__description">Исследователь океана</p>
+                </div>
+            </div>
+    
+            <button class="profile__add-button">
+                <img src="./images/add-button.svg" alt="Добавить фото">
+            </button>
             
-            <div class="element__card">
-                <p class="element__description">Карачаевск</p>
-                <button class="element__group">
-                    <img src="./images/Group.svg" alt="Поставить лайк">
+        </section>
+    
+        <section class="popup">
+    
+            <div class="popup__container">
+                <button class="popup__close">
+                    <img src="./images/close-icon.png" alt="Закрыть окно" class="popup__close-icon">
                 </button>
+                <form action="./script/script.js" method="get" class="popup__form">
+                    <h2 class="popup__heading">Редактировать профиль</h2>
+                    <input type="text" name="name"required class="popup__input popup__name">
+                    <input type="text" name="description"required class="popup__input popup__description">
+                    <input type="submit" class="popup__save" value="Сохранить">
+              </form>
             </div>
             
-        </div>
-
-        <div class="element">
-
-            <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
-            
-            <div class="element__card">
-                <p class="element__description">Эльбрус</p>
-                <button class="element__group">
-                    <img src="./images/Group.svg" alt="Поставить лайк">
-                </button>
+        </section>
+    
+        <section class="elements">
+    
+            <div class="element">
+    
+                <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
+                
+                <div class="element__card">
+                    <p class="element__description">Карачаевск</p>
+                    <button class="element__like">
+                        <img src="./images/like.svg" alt="Поставить лайк">
+                    </button>
+                </div>
+                
             </div>
-            
-        </div>
-
-        <div class="element">
-
-            <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
-            
-            <div class="element__card">
-                <p class="element__description">Домбай</p>
-                <button class="element__group">
-                    <img src="./images/Group.svg" alt="Поставить лайк">
-                </button>
+    
+            <div class="element">
+    
+                <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
+                
+                <div class="element__card">
+                    <p class="element__description">Эльбрус</p>
+                    <button class="element__like">
+                        <img src="./images/like.svg" alt="Поставить лайк">
+                    </button>
+                </div>
+                
             </div>
-            
-        </div>
-
-        <div class="element">
-
-            <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
-
-            <div class="element__card">
-                <p class="element__description">Гора Эльбрус</p>
-                <button class="element__group">
-                    <img src="./images/Group.svg" alt="Поставить лайк">
-                </button>
+    
+            <div class="element">
+    
+                <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
+                
+                <div class="element__card">
+                    <p class="element__description">Домбай</p>
+                    <button class="element__like">
+                        <img src="./images/like.svg" alt="Поставить лайк">
+                    </button>
+                </div>
+                
             </div>
-            
-        </div>
-
-        <div class="element">
-
-            <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
-            
-            <div class="element__card">
-                <p class="element__description">Домбай</p>
-                <button class="element__group">
-                    <img src="./images/Group.svg" alt="Поставить лайк">
-                </button>
+    
+            <div class="element">
+    
+                <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
+    
+                <div class="element__card">
+                    <p class="element__description">Гора Эльбрус</p>
+                    <button class="element__like">
+                        <img src="./images/like.svg" alt="Поставить лайк">
+                    </button>
+                </div>
+                
             </div>
-            
-        </div>
-
-        <div class="element">
-
-            <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
-            
-            <div class="element__card">
-                <p class="element__description">Карачаево-Черкасск</p>
-                <button class="element__group">
-                    <img src="./images/Group.svg" alt="Поставить лайк">
-                </button>
+    
+            <div class="element">
+    
+                <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
+                
+                <div class="element__card">
+                    <p class="element__description">Домбай</p>
+                    <button class="element__like">
+                        <img src="./images/like.svg" alt="Поставить лайк">
+                    </button>
+                </div>
+                
             </div>
-            
-        </div>
-
-    </section>
+    
+            <div class="element">
+    
+                <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкасск" class="element__photo">
+                
+                <div class="element__card">
+                    <p class="element__description">Карачаево-Черкасск</p>
+                    <button class="element__like">
+                        <img src="./images/like.svg" alt="Поставить лайк">
+                    </button>
+                </div>
+                
+            </div>
+    
+        </section>
+    </main>
 
     <footer class="footer">
         <p class="footer__author">© 2020 Mesto Russia</p>
