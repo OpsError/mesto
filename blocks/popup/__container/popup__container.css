@@ -1,0 +1,28 @@
+.popup__container{
+    max-width: 430px;
+    min-height: 330px;
+    z-index: 2;
+    position: fixed;
+    top: calc((100% - 330px)/2);
+    left: calc((100% - 430px)/2);
+    display: grid;
+    grid-template-areas: 
+        ". close-button"
+        "form .";
+    grid-gap: 8px;
+    grid-template-columns: 1fr auto;
+}
+
+@media screen and (max-width: 576px) {
+    .popup__container{
+        grid-template-areas: 
+        "close-button ."
+        "form .";
+        grid-template-columns: auto;
+        grid-column-gap: 0;
+        grid-row-gap: 16px;
+        width: 75%;
+        left: 50%;
+        margin-left: -37.5%;
+    }
+}

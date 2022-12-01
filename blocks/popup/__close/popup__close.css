@@ -1,0 +1,20 @@
+.popup__close{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    opacity: 1;
+    transition: opacity .5s;
+    grid-area: close-button;
+    justify-self: left;
+    align-self: flex-end;
+}
+
+.popup__close:hover{
+    opacity: .6;
+}
+
+@media screen and (max-width: 576px) {
+    .popup__close{
+        justify-self: end;
+    }
+}

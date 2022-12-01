@@ -1,0 +1,13 @@
+.element{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 576px) {
+    .element{
+        width: 100%;
+    }
+}

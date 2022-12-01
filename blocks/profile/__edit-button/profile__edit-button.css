@@ -1,0 +1,14 @@
+.profile__edit-button{
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    grid-area: button;
+    align-self: center;
+    max-height: 24px;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.profile__edit-button:hover{
+    opacity: 0.6;
+}
