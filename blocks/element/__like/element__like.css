@@ -6,6 +6,7 @@
     margin-left: 22px;
     opacity: 1;
     transition: opacity .5s;
+    cursor: pointer;
 }
 
 .element__like:hover{

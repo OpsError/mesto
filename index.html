@@ -16,120 +16,102 @@
         
         <section class="profile">
             <div class="profile__bio">
-                <div class="profile__avatar">
-                    <img src="images/avatar.jpg" alt="Автарка профиля" class="profile__photo">
-                </div>
+                <img src="images/avatar.jpg" alt="Автарка профиля" class="profile__photo">
     
                 <div class="profile__info">
-                    <h2 class="profile__name">Жак-Ив Кусто</h2>
-                    <button class="profile__edit-button">
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <button type="button" class="profile__edit-button">
                         <img src="./images/edit-button.svg" alt="Редактирование профиля">
                     </button>
                     <p class="profile__description">Исследователь океана</p>
                 </div>
             </div>
     
-            <button class="profile__add-button">
+            <button type="button" class="profile__add-button">
                 <img src="./images/add-button.svg" alt="Добавить фото">
             </button>
             
         </section>
     
-        <section class="popup">
-    
-            <div class="popup__container">
-                <button class="popup__close">
-                    <img src="./images/close-icon.png" alt="Закрыть окно" class="popup__close-icon">
-                </button>
-                <form action="./script/script.js" method="get" class="popup__form">
-                    <h2 class="popup__heading">Редактировать профиль</h2>
-                    <input type="text" name="name" required class="popup__input popup__name">
-                    <input type="text" name="description" required class="popup__input popup__description">
-                    <input type="submit" class="popup__save" value="Сохранить">
-              </form>
-            </div>
-            
-        </section>
-    
         <section class="elements">
     
-            <div class="element">
+            <article class="element">
     
                 <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__photo">
                 
                 <div class="element__card">
-                    <p class="element__description">Карачаевск</p>
-                    <button class="element__like element__like_active">
+                    <h2 class="element__description">Карачаевск</h2>
+                    <button type="button" class="element__like element__like_active">
                         <img src="./images/like.svg" alt="Поставить лайк">
                     </button>
                 </div>
                 
-            </div>
+            </article>
     
-            <div class="element">
+            <article class="element">
     
                 <img src="./images/elbrus.jpg" alt="Эльбрус" class="element__photo">
                 
                 <div class="element__card">
-                    <p class="element__description">Эльбрус</p>
-                    <button class="element__like element__like_active">
+                    <h2 class="element__description">Эльбрус</h2>
+                    <button type="button" class="element__like element__like_active">
                         <img src="./images/like.svg" alt="Поставить лайк">
                     </button>
                 </div>
                 
-            </div>
+            </article>
     
-            <div class="element">
+            <article class="element">
     
                 <img src="./images/dombai.jpg" alt="Домбай" class="element__photo">
                 
                 <div class="element__card">
-                    <p class="element__description">Домбай</p>
-                    <button class="element__like element__like_active">
+                    <h2 class="element__description">Домбай</h2>
+                    <button type="button" class="element__like element__like_active">
                         <img src="./images/like.svg" alt="Поставить лайк">
                     </button>
                 </div>
                 
-            </div>
+            </article>
     
-            <div class="element">
+            <article class="element">
     
                 <img src="./images/baikal-2.jpg" alt="Озеро Байкал" class="element__photo">
     
                 <div class="element__card">
-                    <p class="element__description">Озеро Байкал</p>
-                    <button class="element__like element__like_active">
+                    <h2 class="element__description">Озеро Байкал</h2>
+                    <button type="button" class="element__like element__like_active">
                         <img src="./images/like.svg" alt="Поставить лайк">
                     </button>
                 </div>
                 
-            </div>
+            </article>
     
-            <div class="element">
+            <article class="element">
     
                 <img src="./images/kamchatka-2.jpg" alt="Камчатка" class="element__photo">
                 
                 <div class="element__card">
-                    <p class="element__description">Камчатка</p>
-                    <button class="element__like element__like_active">
+                    <h2 class="element__description">Камчатка</h2>
+                    <button type="button" class="element__like element__like_active">
                         <img src="./images/like.svg" alt="Поставить лайк">
                     </button>
                 </div>
                 
-            </div>
+            </article>
     
-            <div class="element">
+            <article class="element">
     
                 <img src="./images/komi.jpg" alt="Карачаево-Черкасск" class="element__photo">
                 
                 <div class="element__card">
-                    <p class="element__description">Столбы Выветривания</p>
-                    <button class="element__like element__like_active">
+                    <h2 class="element__description">Столбы Выветривания</h2>
+                    <button type="button" class="element__like element__like_active">
                         <img src="./images/like.svg" alt="Поставить лайк">
                     </button>
                 </div>
                 
-            </div>
+            </article>
     
         </section>
     </main>
@@ -138,6 +120,28 @@
         <p class="footer__author">© 2020 Mesto Russia</p>
     </footer>
 
-    <script src="./script/script.js"></script>
+    <section class="popup">
+        
+        <div class="popup__container">
+
+            <button type="button" class="popup__close">
+                <img src="./images/close-icon.svg" alt="Закрыть окно" class="popup__close-icon">
+            </button>
+
+            <div class="popup__form-heading">
+                <h2 class="popup__heading">Редактировать профиль</h2>
+
+                <form name="form" action="./scripts/index.js" method="get" class="popup__form">
+                    <input type="text" name="name" required value="" class="popup__input popup__input_name">
+                    <input type="text" name="description" required value="" class="popup__input popup__input_description">
+                    <button type="submit" class="popup__save">Сохранить</button>
+                </form>
+            </div>
+                
+        </div>
+        
+    </section>
+
+    <script src="./scripts/index.js"></script>
 </body>
 </html>

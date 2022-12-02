@@ -3,10 +3,12 @@
     border: none;
     padding: 0;
     opacity: 1;
+    max-width: 32px;
+    max-height: 32px;
     transition: opacity .5s;
-    grid-area: close-button;
-    justify-self: left;
-    align-self: flex-end;
+    margin-right: -478px;
+    margin-bottom: 14px;
+    cursor: pointer;
 }
 
 .popup__close:hover{
@@ -16,5 +18,7 @@
 @media screen and (max-width: 576px) {
     .popup__close{
         justify-self: end;
+        margin-bottom: 16px;
+        margin-right: -260px;
     }
 }
