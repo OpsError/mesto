@@ -1,5 +1,5 @@
 .element__card{
     display: flex;
     justify-content: space-between;
-    margin: 25px 20px 30px 20px;
+    margin: 20px 20px 25px 20px;
 }

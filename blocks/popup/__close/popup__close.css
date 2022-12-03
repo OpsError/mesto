@@ -6,9 +6,11 @@
     max-width: 32px;
     max-height: 32px;
     transition: opacity .5s;
-    margin-right: -478px;
-    margin-bottom: 14px;
     cursor: pointer;
+    z-index: 10;
+    position: fixed;
+    margin-top: -75px;
+    margin-left: 402px;
 }
 
 .popup__close:hover{
@@ -17,8 +19,9 @@
 
 @media screen and (max-width: 576px) {
     .popup__close{
-        justify-self: end;
-        margin-bottom: 16px;
-        margin-right: -260px;
+        max-width: 20px;
+        max-height: 20px;
+        margin-left: 240px;
+        margin-top: -61px;
     }
 }
