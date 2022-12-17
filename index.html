@@ -91,8 +91,8 @@
             <h2 class="popup__heading">Новое место</h2>
 
             <form name="form" action="./scripts/index.js" method="get" class="popup__form">
-                <input type="text" name="name" required value="" placeholder="Название" class="popup__input popup__input_type_name">
-                <input type="text" name="description" required value="" placeholder="Ссылка на картинку" class="popup__input popup__input_type_description">
+                <input type="text" name="name" required value="" placeholder="Название" class="popup__input popup__input_type_title">
+                <input type="url" name="description" required value="" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link">
                 <button type="submit" class="popup__save">Создать</button>
             </form>
                 
@@ -115,6 +115,7 @@
         </div>
     </section>
 
+    <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
