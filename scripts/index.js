@@ -23,6 +23,7 @@ const popupImage = imageFull.querySelector('.popup');
 const imageFigure = imageFull.querySelector('.popup__image-container');
 const imageFullFromCard = popupImage.querySelector('.popup__image');
 const buttonCloseImagePopup = imageFull.querySelector('.popup__close');
+const imageDescription = imageFigure.querySelector('.popup__figcaption');
 
 const elementTemplate = page.querySelector('#element').content.querySelector('.element');
 const elementsSection = page.querySelector('.elements');
@@ -48,6 +49,7 @@ function createCard(cardData){
     const buttonLike = elementCard.querySelector('.element__like');
     const buttonTrash = elementCard.querySelector('.element__trash');
     const elementPhoto = elementCard.querySelector('.element__photo');
+    const iconButtonLike = elementCard.querySelector('.element__like-icon');
 
     elementPhoto.src = cardData.link;
     elementPhoto.alt = cardData.name;
@@ -55,7 +57,7 @@ function createCard(cardData){
 
     // лайк
     buttonLike.addEventListener('click', () => {
-      elementCard.querySelector('.element__like-icon').classList.toggle('element__like-icon_active');
+      iconButtonLike.classList.toggle('element__like-icon_active');
     });
 
     // удалить
@@ -68,7 +70,7 @@ function createCard(cardData){
       openPopup(popupImage);
       imageFullFromCard.src = cardData.link;
       imageFullFromCard.alt = cardData.name;
-      imageFigure.querySelector('.popup__figcaption').textContent = cardData.name;
+      imageDescription.textContent = cardData.name;
     });
 
     return elementCard;
