@@ -19,10 +19,10 @@
                 <img src="images/floppa.jpg" alt="Автарка профиля" class="profile__photo">
     
                 <div class="profile__info">
-                    <h1 class="profile__name">не токсик</h1>
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button type="button" class="profile__edit-button">
                     </button>
-                    <p class="profile__description">Выбери своего бойца</p>
+                    <p class="profile__description">Исследователь</p>
                 </div>
             </div>
     
@@ -62,6 +62,7 @@
         <p class="footer__author">© 2022 Mesto Russia</p>
     </footer>
 
+    <!-- Редактировать профиль -->
     <section class="form-edit">
         <div class="popup">
             <div class="popup__container">
@@ -71,31 +72,48 @@
 
             <h2 class="popup__heading">Редактировать профиль</h2>
 
-            <form name="form" action="./scripts/index.js" method="get" class="popup__form">
-                <input type="text" name="name" required value="" class="popup__input popup__input_type_name">
-                <input type="text" name="description" required value="" class="popup__input popup__input_type_description">
-                <button type="submit" class="popup__save">Сохранить</button>
+            <form name="form" action="./scripts/index.js" method="get" class="popup__form" novalidate>
+                <fieldset class="popup__form-set">
+                    <input type="text" name="name" id="name-input" required value="" class="popup__input popup__input_type_name" minlength="2" maxlength="40" placeholder="Имя">
+
+                    <span class="name-input-error"></span>
+
+                    <input type="text" name="description" id="description-input" required value="" class="popup__input popup__input_type_description" minlength="2" maxlength="200" placeholder="О себе">
+
+                    <span class="description-input-error"></span>
+
+                    <button type="submit" class="popup__save">Сохранить</button>
+                </fieldset>
             </form>
-                
+
         </div>
         </div>
     </section>
 
+    <!-- Новое место -->
     <section class="form-add">
         <div class="popup">
             <div class="popup__container">
             <button type="button" class="popup__close">
                 <img src="./images/close-icon.svg" alt="Закрыть окно" class="popup__close-icon">
             </button>
-
             <h2 class="popup__heading">Новое место</h2>
 
-            <form name="form" action="./scripts/index.js" method="get" class="popup__form">
-                <input type="text" name="name" required value="" placeholder="Название" class="popup__input popup__input_type_title">
-                <input type="url" name="description" required value="" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link">
-                <button type="submit" class="popup__save">Создать</button>
+            
+            <form name="form" action="./scripts/index.js" method="get" class="popup__form" novalidate>
+                <fieldset class="popup__form-set">
+                    <input type="text" name="title" id="title-input" required value="" placeholder="Название" class="popup__input popup__input_type_title" minlength="2" maxlength="30">
+
+                    <span class="title-input-error"></span>
+
+                    <input type="url" name="link" id="link-input" required value="" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link">
+
+                    <span class="link-input-error"></span>
+
+                    <button type="submit" class="popup__save">Создать</button>
+                </fieldset> 
             </form>
-                
+
             </div>
         </div>
     </section>
@@ -115,6 +133,7 @@
         </div>
     </section>
 
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
 </body>

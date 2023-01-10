@@ -1,5 +1,7 @@
 const page = document.querySelector('.page');
 
+const popupList = page.querySelectorAll('.popup');
+
 const formEditProfile = page.querySelector('.form-edit');
 const formAddCard = page.querySelector('.form-add');
 const imageFull = page.querySelector('.image-full');
@@ -81,9 +83,27 @@ function renderCard(elementCard){
   elementsSection.prepend(elementCard);
 }
 
+//закрыть попап на esc
+const closePopupEscape = (evt, popupClass) => {
+  if (evt.key === 'Escape'){
+    closePopup(popupClass);
+  }
+}
+
+//закрыть попап нажатием на оверлей
+popupList.forEach((popup) => {
+  popup.addEventListener('mouseup', (evt) => {
+    const targetClassList = evt.target.classList;
+    if (targetClassList.contains('popup') || (targetClassList.contains('popup__close'))) {
+      closePopup(popup);
+    }
+  });
+});
+
 //открыть попап
 function openPopup(popup){
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', (evt) => closePopupEscape(evt, popup));
 }
 
 //закрыть попап
@@ -111,19 +131,19 @@ buttonAdd.addEventListener('click', () => {
   openPopup(popupAdd);
   nameInputAdd.value = '';
   srcInputAdd.value = '';
+  enableValidation();
 });
 
 buttonEdit.addEventListener('click', () => {
   openPopup(popupEdit);
   nameInputEdit.value = profileName.textContent;
   jobInputEdit.value = profileDescription.textContent;
+  enableValidation();
 });
-
 
 formEditProfile.querySelector('.popup__form').addEventListener('submit', handleSubmitFormEditProfile);
 
 formAddCard.querySelector('.popup__form').addEventListener('submit', handleSubmitFormAddCard);
-
 
 buttonCloseEditForm.addEventListener('click', () => {
   closePopup(popupEdit);
