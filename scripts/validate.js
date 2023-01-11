@@ -1,26 +1,26 @@
 //показать ошибку ввода
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, config) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add('popup__input_type_error');
+    inputElement.classList.add(config.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add('popup__input-error_active');
+    errorElement.classList.add(config.errorClass);
   }
   
   //скрыть ошибку ввода
-  const hideInputError = (formElement, inputElement) => {
+  const hideInputError = (formElement, inputElement, config) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove('popup__input_type_error');
-    errorElement.classList.remove('popup__input-error_active');
+    inputElement.classList.remove(config.inputErrorClass);
+    errorElement.classList.remove(config.errorClass);
     errorElement.textContent = '';
   }
   
   //проверка формы на валидность
-  const checkInputValidity = (formElement, inputElement) => {
+  const checkInputValidity = (formElement, inputElement, config) => {
     if (!inputElement.validity.valid) { //если есть ошибка
       console.log(inputElement.validationMessage);
-      showInputError(formElement, inputElement, inputElement.validationMessage);
+      showInputError(formElement, inputElement, inputElement.validationMessage, config);
     } else {
-      hideInputError(formElement, inputElement);
+      hideInputError(formElement, inputElement, config);
     }
   }
   
@@ -32,41 +32,43 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   }
   
   //сделать кнопку неактивной(активной) при ошибке(правильном вводе)
-  const toggleButtonState = (inputList, buttonElement) => {
+  const toggleButtonState = (inputList, buttonElement, config) => {
     if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add('popup__save_inactive');
+      buttonElement.classList.add(config.inactiveButtonClass);
+      buttonElement.disabled = true;
     } else {
-      buttonElement.classList.remove('popup__save_inactive');
+      buttonElement.classList.remove(config.inactiveButtonClass);
+      buttonElement.disabled = false;
     }
   }
   
   //установить слушатели на каждую форму
-  const setEventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  const setEventListeners = (formElement, config) => {
+    const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
     
-    const buttonElement = formElement.querySelector('.popup__save');
+    const buttonElement = formElement.querySelector(config.submitButtonSelector);
     //проверить кнопку при открытии формы
-    toggleButtonState(inputList, buttonElement);
+    toggleButtonState(inputList, buttonElement, config);
   
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function() {
-        checkInputValidity(formElement, inputElement);
+        checkInputValidity(formElement, inputElement, config);
         //проверять кнопку при вводе каждого символа
-        toggleButtonState(inputList, buttonElement);
+        toggleButtonState(inputList, buttonElement, config);
       });
     });
   }
   
-  function enableValidation() {
-    const formList = Array.from(document.querySelectorAll('.popup__form'));
+  function enableValidation(config) {
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
     formList.forEach((formElement) => {
       formElement.addEventListener('submit', function(evt) {
         evt.preventDefault();
       });
       
-      const fieldsetList = Array.from(formElement.querySelectorAll('.popup__form-set'));
+      const fieldsetList = Array.from(formElement.querySelectorAll(config.fieldsetSelector));
       fieldsetList.forEach((fieldSet) => {
-        setEventListeners(fieldSet);
+        setEventListeners(fieldSet, config);
       });
     });
   }

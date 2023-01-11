@@ -14,21 +14,31 @@ const profileDescription = page.querySelector('.profile__description');
 const popupEdit = formEditProfile.querySelector('.popup');
 const nameInputEdit = formEditProfile.querySelector('.popup__input_type_name');
 const jobInputEdit = formEditProfile.querySelector('.popup__input_type_description');
-const buttonCloseEditForm = formEditProfile.querySelector('.popup__close');
+const buttonSaveEditForm = formEditProfile.querySelector('.popup__save');
 
 const popupAdd = formAddCard.querySelector('.popup');
 const nameInputAdd = formAddCard.querySelector('.popup__input_type_title');
 const srcInputAdd = formAddCard.querySelector('.popup__input_type_link');
-const buttonCloseAddForm = formAddCard.querySelector('.popup__close');
+const buttonSaveAddForm = formAddCard.querySelector('.popup__save');
 
 const popupImage = imageFull.querySelector('.popup');
 const imageFigure = imageFull.querySelector('.popup__image-container');
 const imageFullFromCard = popupImage.querySelector('.popup__image');
-const buttonCloseImagePopup = imageFull.querySelector('.popup__close');
 const imageDescription = imageFigure.querySelector('.popup__figcaption');
 
 const elementTemplate = page.querySelector('#element').content.querySelector('.element');
 const elementsSection = page.querySelector('.elements');
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  fieldsetSelector: '.popup__form-set',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save',
+  inactiveButtonClass: 'popup__save_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
+
 
 // ===================================================================================================
 
@@ -84,17 +94,17 @@ function renderCard(elementCard){
 }
 
 //закрыть попап на esc
-const closePopupEscape = (evt, popupClass) => {
+const closePopupEscape = (evt) => {
   if (evt.key === 'Escape'){
+    const popupClass = page.querySelector('.popup_opened');
     closePopup(popupClass);
   }
 }
 
-//закрыть попап нажатием на оверлей
+//закрыть попап нажатием на оверлей/крестик
 popupList.forEach((popup) => {
-  popup.addEventListener('mouseup', (evt) => {
-    const targetClassList = evt.target.classList;
-    if (targetClassList.contains('popup') || (targetClassList.contains('popup__close'))) {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup') || (evt.target.classList.contains('popup__close-icon'))) {
       closePopup(popup);
     }
   });
@@ -103,12 +113,13 @@ popupList.forEach((popup) => {
 //открыть попап
 function openPopup(popup){
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', (evt) => closePopupEscape(evt, popup));
+  document.addEventListener('keydown', closePopupEscape);
 }
 
 //закрыть попап
 function closePopup(popup){
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEscape);
 }
 
 //изменить имя/описание
@@ -121,9 +132,16 @@ function handleSubmitFormEditProfile(evt) {
 
 //добавление карточек из массива
 initialCards.forEach(card => {
-  let initialCard = createCard(card);
+  const initialCard = createCard(card);
   renderCard(initialCard);
 });
+
+//
+function blockButtonSave(popup) {
+  const buttonClass = popup.querySelector('.popup__save');
+  buttonClass.classList.add('popup__save_inactive');
+  buttonClass.disabled = true;
+}
 
 // ========================================================================================================
 
@@ -131,28 +149,17 @@ buttonAdd.addEventListener('click', () => {
   openPopup(popupAdd);
   nameInputAdd.value = '';
   srcInputAdd.value = '';
-  enableValidation();
+  blockButtonSave(popupAdd);
 });
 
 buttonEdit.addEventListener('click', () => {
-  openPopup(popupEdit);
   nameInputEdit.value = profileName.textContent;
   jobInputEdit.value = profileDescription.textContent;
-  enableValidation();
+  openPopup(popupEdit);
 });
 
 formEditProfile.querySelector('.popup__form').addEventListener('submit', handleSubmitFormEditProfile);
 
 formAddCard.querySelector('.popup__form').addEventListener('submit', handleSubmitFormAddCard);
 
-buttonCloseEditForm.addEventListener('click', () => {
-  closePopup(popupEdit);
-});
-
-buttonCloseImagePopup.addEventListener('click', () => {
-  closePopup(popupImage);
-});
-
-buttonCloseAddForm.addEventListener('click', () => {
-  closePopup(popupAdd);
-});
+enableValidation(validationConfig);
