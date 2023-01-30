@@ -1,4 +1,4 @@
-import {openPopup, popupImage, imageFullFromCard, imageDescription} from "./index.js";
+import {openPopup, popupImage, imageFullFromCard, imageDescription} from "./ImageData.js";
 
 export default class Card {
     constructor(data, templateSelector) {
@@ -33,14 +33,15 @@ export default class Card {
         //удалить
         buttonTrash.addEventListener('click', () => {
             this._element.remove();
+            this._element = null;
         });
 
         //открыть картинку на весь экран
         elementPhoto.addEventListener('click', () => {
-            openPopup(popupImage);
             imageFullFromCard.src = this._data.link;
             imageFullFromCard.alt = this._data.name;
             imageDescription.textContent = this._data.name;
+            openPopup(popupImage);
         });
     }
 
