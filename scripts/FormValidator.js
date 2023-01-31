@@ -65,9 +65,8 @@ export default class FormValidator {
 
     //заблокировать кнопку при открытии попапа
     blockButtonSave(popup) {
-        const buttonClass = popup.querySelector('.popup__save');
-        buttonClass.classList.add('popup__save_inactive');
-        buttonClass.disabled = true;
+        this._buttonElement.classList.add('popup__save_inactive');
+        this._buttonElement.disabled = true;
     }
       
     enableValidation() {

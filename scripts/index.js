@@ -39,6 +39,8 @@ const validationConfig = {
 
 const formAddValidation = new FormValidator(validationConfig, formAddCard.querySelector('.popup__form'));
 const formEditValidation = new FormValidator(validationConfig, formEditProfile.querySelector('.popup__form'));
+formAddValidation.enableValidation();
+formEditValidation.enableValidation();
 
 
 // ===================================================================================================
@@ -95,14 +97,12 @@ buttonAdd.addEventListener('click', () => {
   nameInputAdd.value = '';
   srcInputAdd.value = '';
   formAddValidation.blockButtonSave(popupAdd);
-  formAddValidation.enableValidation();
 });
 
 buttonEdit.addEventListener('click', () => {
   nameInputEdit.value = profileName.textContent;
   jobInputEdit.value = profileDescription.textContent;
   openPopup(popupEdit);
-  formEditValidation.enableValidation();
 });
 
 formEditProfile.querySelector('.popup__form').addEventListener('submit', handleSubmitFormEditProfile);
