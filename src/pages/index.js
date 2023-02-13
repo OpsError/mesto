@@ -8,7 +8,7 @@ import UserInfo from '../components/UserInfo.js';
 
 import { initialCards, validationConfig, formAddCard, formEditProfile, popupAdd, popupEdit, buttonAdd, buttonEdit, nameInputAdd, nameInputEdit, srcInputAdd, jobInputEdit,
 profileName, profileDescription} from '../utils/utils.js';
-import { openImage } from '../utils/utils.js';
+import { openImage, createCard } from '../utils/utils.js';
 
 // Валидация
 const formAddValidation = new FormValidator(validationConfig, formAddCard.querySelector('.popup__form'));
@@ -17,8 +17,7 @@ formAddValidation.enableValidation();
 formEditValidation.enableValidation();
 
 const popupAddCard = new PopupWithForm(popupAdd, ({name, description}) => {
-    const elementCard = new Card({name, description}, '#element', {openImage});
-    const cardTemplate = elementCard.generateCard();
+    const cardTemplate = createCard({name, description});
     const card = new Section({
         items: {name, description},
         renderer: () => {}
@@ -46,8 +45,7 @@ popupEditProfile.setEventListeners();
 const card = new Section({
     items: initialCards,
     renderer: (element) => {
-        const elementCard = new Card(element, '#element', {openImage});
-        const cardTemplate = elementCard.generateCard();
+        const cardTemplate = createCard(element);
         card.addItem(cardTemplate);
     }
 }, '.elements');

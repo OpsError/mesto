@@ -1,3 +1,6 @@
+import Card from "../components/Card.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+
 export const initialCards = [
     {
       name: 'Манджиро Сано',
@@ -57,9 +60,14 @@ export const validationConfig = {
 
 //открыть картинку
 export function openImage ({link, name}) {
-  const imageFullFromCard = document.querySelector('.popup__image');
-  const imageDescription = document.querySelector('.popup__figcaption');
-  imageFullFromCard.src = link;
-  imageFullFromCard.alt = name;
-  imageDescription.textContent = name;
+  const imageFull = document.querySelector('.popup_image-full');
+  const popupImageObject = new PopupWithImage(imageFull);
+  popupImageObject.open(name, link);
+}
+
+export function createCard(element) {
+  const elementCard = new Card(element, '#element', {openImage});
+  const cardTemplate = elementCard.generateCard();
+
+  return cardTemplate;
 }

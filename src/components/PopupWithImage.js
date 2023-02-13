@@ -1,15 +1,18 @@
-import {imageFullFromCard, imageDescription} from '../utils/utils.js';
+import Popup from './Popup.js';
 
-class PopupWithImage extends Popup {
-    constructor(popup, data) {
+export default class PopupWithImage extends Popup {
+    constructor(popup) {
         super(popup);
-        this._data = data;
+
+        this._image = this._popupSelector.querySelector('.popup__image');
+        this._figcaption = this._popupSelector.querySelector('.popup__figcaption');
     }
 
-    open() {
-        imageFullFromCard.src = this._data.link;
-        imageFullFromCard.alt = this._data.name;
-        imageDescription.textContent = this._data.name;
+    open(name, link) {
+        this._image.src = link;
+        this._image.alt = name;
+        this._figcaption.textContent = name;
+        super.setEventListeners();
         super.open();
     }
 }

@@ -4,6 +4,9 @@ export default class UserInfo {
     constructor({title, description}) {
         this._title = title;
         this._description = description;
+
+        this._profileName = document.querySelector('.profile__name');
+        this._profileDescription = document.querySelector('.profile__description');
     }
 
     //собирает данные со страницы
@@ -15,9 +18,7 @@ export default class UserInfo {
 
     //устанавливает новое имя и описание
     setUserInfo(name, description) {
-        const profileName = document.querySelector('.profile__name');
-        const profileDescription = document.querySelector('.profile__description');
-        profileName.textContent = name;
-        profileDescription.textContent = description;
+        this._profileName.textContent = name;
+        this._profileDescription.textContent = description;
     }
 }
