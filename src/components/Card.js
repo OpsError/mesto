@@ -1,6 +1,3 @@
-import {popupImage} from "../utils/utils.js";
-import Popup  from "./Popup.js";
-
 export default class Card {
     constructor(data, templateSelector, {openImage}) {
         this._data = data;
@@ -26,7 +23,6 @@ export default class Card {
         const buttonLike = this._element.querySelector('.element__like');
         const buttonTrash = this._element.querySelector('.element__trash');
         const iconButtonLike = this._element.querySelector('.element__like-icon');
-        // const elementPhoto = this._element.querySelector('.element__photo');
 
         //лайк
         buttonLike.addEventListener('click', () => {

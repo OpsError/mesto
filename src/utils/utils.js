@@ -32,7 +32,7 @@ const page = document.querySelector('.page');
   
 export const formEditProfile = page.querySelector('.form-edit');
 export const formAddCard = page.querySelector('.form-add');
-const imageFull = page.querySelector('.image-full');
+export const imageFull = document.querySelector('.popup_image-full');
   
 export const buttonEdit = page.querySelector('.profile__edit-button');
 export const buttonAdd = page.querySelector('.profile__add-button');
@@ -58,10 +58,11 @@ export const validationConfig = {
   errorClass: 'popup__input-error_active'
 }
 
+export const popupImageObject = new PopupWithImage(imageFull);
+popupImageObject.setEventListeners();
+
 //открыть картинку
 export function openImage ({link, name}) {
-  const imageFull = document.querySelector('.popup_image-full');
-  const popupImageObject = new PopupWithImage(imageFull);
   popupImageObject.open(name, link);
 }
 

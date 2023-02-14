@@ -18,10 +18,6 @@ formEditValidation.enableValidation();
 
 const popupAddCard = new PopupWithForm(popupAdd, ({name, description}) => {
     const cardTemplate = createCard({name, description});
-    const card = new Section({
-        items: {name, description},
-        renderer: () => {}
-    }, '.elements');
     card.addItem(cardTemplate);
 
     popupAddCard.close();
