@@ -25,7 +25,7 @@ export default class PopupWithForm extends Popup {
             this._list = this._getInputValues();
             this._handleSubmitForm({
                 name: this._list.title,
-                description: this._list.description});
+                about: this._list.about});
         });
         super.setEventListeners();
     }

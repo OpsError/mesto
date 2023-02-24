@@ -24,4 +24,16 @@ export default class Api {
         })
             .then (this._handleResponse);
     }
+
+    patchInfo(data) {
+        return fetch(`${this._url}/users/me`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: data.name,
+                about: data.about
+            })
+        })
+            .then (this._handleResponse);
+    }
 }

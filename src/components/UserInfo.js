@@ -1,9 +1,9 @@
 
 
 export default class UserInfo {
-    constructor({title, description}) {
+    constructor({title, about}) {
         this._title = title;
-        this._description = description;
+        this._about = about;
 
         this._profileName = document.querySelector('.profile__name');
         this._profileDescription = document.querySelector('.profile__description');
@@ -12,13 +12,13 @@ export default class UserInfo {
     //собирает данные со страницы
     getUserInfo() {
         const formTitle = this._title.textContent;
-        const formDescription = this._description.textContent;
-        return {name: formTitle, description: formDescription};
+        const formDescription = this._about.textContent;
+        return {name: formTitle, about: formDescription};
     }
 
     //устанавливает новое имя и описание
-    setUserInfo(name, description) {
+    setUserInfo(name, about) {
         this._profileName.textContent = name;
-        this._profileDescription.textContent = description;
+        this._profileDescription.textContent = about;
     }
 }

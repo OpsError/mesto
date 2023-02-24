@@ -31,9 +31,10 @@ api.getInfo()
         profileName.textContent = res.name;
         profileDescription.textContent = res.about;
         profilePhoto.src = res.avatar;
+        console.log(res);
     });
 
-
+//потом
 const popupAddCard = new PopupWithForm(popupAdd, ({name, description}) => {
     const cardTemplate = createCard({name, description});
     card.addItem(cardTemplate);
@@ -44,12 +45,17 @@ popupAddCard.setEventListeners();
 
 const infoUser = new UserInfo({
     title: profileName,
-    description: profileDescription
+    about: profileDescription
 });
 
-const popupEditProfile = new PopupWithForm(popupEdit, ({name, description}) => {
-    infoUser.setUserInfo(name, description);
-    popupEditProfile.close();
+
+const popupEditProfile = new PopupWithForm(popupEdit, ({name, about}) => {
+    api.patchInfo({name, about})
+        .then ((res) => {
+            console.log(res);
+            infoUser.setUserInfo(res.name, res.about);
+            popupEditProfile.close();
+        });
 });
 
 popupEditProfile.setEventListeners();
@@ -80,6 +86,6 @@ buttonAdd.addEventListener('click', () => {
 buttonEdit.addEventListener('click', () => {
     const infoFromPage = infoUser.getUserInfo();
     nameInputEdit.value = infoFromPage.name;
-    jobInputEdit.value = infoFromPage.description;
+    jobInputEdit.value = infoFromPage.about;
     popupEditProfile.open();
 });
