@@ -7,7 +7,7 @@ import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
-import { initialCards, validationConfig, formAddCard, formEditProfile, popupAdd, popupEdit, buttonAdd, buttonEdit, nameInputAdd, nameInputEdit, srcInputAdd, jobInputEdit,
+import { validationConfig, formAddCard, formEditProfile, popupAdd, popupEdit, buttonAdd, buttonEdit, nameInputAdd, nameInputEdit, srcInputAdd, jobInputEdit,
 profileName, profileDescription, profilePhoto} from '../utils/utils.js';
 import { openImage, createCard } from '../utils/utils.js';
 
@@ -56,14 +56,17 @@ popupEditProfile.setEventListeners();
 
 
 //Отрисовка дефолтных карточек
-const card = new Section({
-    items: initialCards,
-    renderer: (element) => {
-        const cardTemplate = createCard(element);
-        card.addItem(cardTemplate);
-    }
-}, '.elements');
-card.renderItems();
+api.getCard()
+    .then ((res) => {
+        const card = new Section({
+            items: res,
+            renderer:  (element) => {
+                const cardTemplate = createCard(element);
+                card.addItem(cardTemplate);
+            }
+        }, '.elements');
+        card.renderItems();
+    });
 
 //слушатель кнопки добавить
 buttonAdd.addEventListener('click', () => {

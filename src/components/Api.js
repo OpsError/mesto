@@ -17,4 +17,11 @@ export default class Api {
         })
             .then (this._handleResponse);
     }
+
+    getCard() {
+        return fetch(`${this._url}/cards`, {
+            headers: this._headers
+        })
+            .then (this._handleResponse);
+    }
 }

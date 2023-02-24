@@ -37,14 +37,14 @@ export default class Card {
 
         //открыть фотографию
         this._elementPhoto.addEventListener('click', () => {
-            this._openImage({link: this._data.description, name: this._data.name});
+            this._openImage({link: this._data.link, name: this._data.name});
         });
         
     }
 
     //устанавливает карточке название, картинку и описание
     generateCard() {
-        this._elementPhoto.src = this._data.description;
+        this._elementPhoto.src = this._data.link;
         this._elementPhoto.alt = this._data.name;
         this._element.querySelector('.element__description').textContent = this._data.name;
         this._setEventListeners();
