@@ -5,9 +5,10 @@ import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 
 import { initialCards, validationConfig, formAddCard, formEditProfile, popupAdd, popupEdit, buttonAdd, buttonEdit, nameInputAdd, nameInputEdit, srcInputAdd, jobInputEdit,
-profileName, profileDescription} from '../utils/utils.js';
+profileName, profileDescription, profilePhoto} from '../utils/utils.js';
 import { openImage, createCard } from '../utils/utils.js';
 
 // Валидация
@@ -15,6 +16,23 @@ const formAddValidation = new FormValidator(validationConfig, formAddCard.queryS
 const formEditValidation = new FormValidator(validationConfig, formEditProfile.querySelector('.popup__form'));
 formAddValidation.enableValidation();
 formEditValidation.enableValidation();
+
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-60',
+    headers: {
+        authorization: '11c262d9-4172-458c-924e-d3009da526d4',
+        'Content-type': 'application/json'
+    }
+});
+
+//при загрузке страницы имя и описание с сервера
+api.getInfo()
+    .then ((res) => {
+        profileName.textContent = res.name;
+        profileDescription.textContent = res.about;
+        profilePhoto.src = res.avatar;
+    });
+
 
 const popupAddCard = new PopupWithForm(popupAdd, ({name, description}) => {
     const cardTemplate = createCard({name, description});

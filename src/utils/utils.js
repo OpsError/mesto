@@ -38,6 +38,7 @@ export const buttonEdit = page.querySelector('.profile__edit-button');
 export const buttonAdd = page.querySelector('.profile__add-button');
 export const profileName = page.querySelector('.profile__name');
 export const profileDescription = page.querySelector('.profile__description');
+export const profilePhoto = page.querySelector('.profile__photo');
   
 export const popupEdit = formEditProfile.querySelector('.popup');
 export const nameInputEdit = formEditProfile.querySelector('.popup__input_type_name');
