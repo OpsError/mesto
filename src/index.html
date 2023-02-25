@@ -46,9 +46,12 @@
                     
                     <div class="element__card">
                         <h2 class="element__description"></h2>
-                        <button type="button" class="element__like">
-                            <img src="<%=require('./images/like.svg')%>" alt="Поставить лайк" class="element__like-icon">
-                        </button>
+                        <div class="element__container">
+                            <button type="button" class="element__like">
+                                <img src="<%=require('./images/like.svg')%>" alt="Поставить лайк" class="element__like-icon">
+                            </button>
+                            <p class="element__like-number">0</p>
+                        </div>
                     </div>
                     
                 </article>

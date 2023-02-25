@@ -5,6 +5,7 @@ export default class Card {
         this._openImage = openImage;
         this._element = this._getTemplate();
         this._elementPhoto = this._element.querySelector('.element__photo');
+        this._countLikes = this._element.querySelector('.element__like-number');
     }
 
     //возвращает селектор шаблона
@@ -47,6 +48,7 @@ export default class Card {
         this._elementPhoto.src = this._data.link;
         this._elementPhoto.alt = this._data.name;
         this._element.querySelector('.element__description').textContent = this._data.name;
+        this._countLikes.textContent = this._data.likes.length + 1;
         this._setEventListeners();
 
         return this._element;

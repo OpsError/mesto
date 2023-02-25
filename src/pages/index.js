@@ -34,7 +34,7 @@ api.getInfo()
         console.log(res);
     });
 
-//потом
+
 const popupAddCard = new PopupWithForm(popupAdd, ({name, link}) => {
     api.postCard({name, link})
         .then ((res) => {
