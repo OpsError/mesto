@@ -35,11 +35,22 @@ api.getInfo()
     });
 
 //потом
-const popupAddCard = new PopupWithForm(popupAdd, ({name, description}) => {
-    const cardTemplate = createCard({name, description});
-    card.addItem(cardTemplate);
+const popupAddCard = new PopupWithForm(popupAdd, ({name, link}) => {
+    api.postCard({name, link})
+        .then ((res) => {
+            const cardTemplate = createCard(res);
+            console.log(cardTemplate);
+            const card = new Section({
+                items: res,
+                renderer:  (element) => {
+                    const cardTemplate = createCard(element);
+                    card.addItem(cardTemplate);
+                }
+            }, '.elements');
+            card.addItem(cardTemplate);
 
-    popupAddCard.close();
+            popupAddCard.close();
+        });
 });
 popupAddCard.setEventListeners();
 
@@ -49,8 +60,8 @@ const infoUser = new UserInfo({
 });
 
 
-const popupEditProfile = new PopupWithForm(popupEdit, ({name, about}) => {
-    api.patchInfo({name, about})
+const popupEditProfile = new PopupWithForm(popupEdit, ({name, link}) => {
+    api.patchInfo({name, link})
         .then ((res) => {
             console.log(res);
             infoUser.setUserInfo(res.name, res.about);
