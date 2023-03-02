@@ -1,12 +1,11 @@
-
-
 export default class UserInfo {
-    constructor({title, about}) {
-        this._title = title;
-        this._about = about;
+    constructor(data) {
+        this._title = data.title;
+        this._about = data.about;
 
         this._profileName = document.querySelector('.profile__name');
         this._profileDescription = document.querySelector('.profile__description');
+        this._profilePhoto = document.querySelector('.profile__photo');
     }
 
     //собирает данные со страницы
@@ -17,8 +16,12 @@ export default class UserInfo {
     }
 
     //устанавливает новое имя и описание
-    setUserInfo(name, about) {
+    setUserInfo({name, about}) {
         this._profileName.textContent = name;
         this._profileDescription.textContent = about;
+    }
+
+    setAvatar(avatar) {
+        this._profilePhoto.src = avatar;
     }
 }

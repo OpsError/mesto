@@ -49,5 +49,30 @@ export default class Api {
             .then (this._handleResponse);
     }
 
-    
+    deleteCard(data) {
+        return fetch(`${this._url}/cards/${data}`, {
+            method: 'DELETE',
+            headers: this._headers,
+            body: JSON.stringify({data})
+        })
+            .then (this._handleResponse);
+    }
+
+    putLike(data) {
+        return fetch(`${this._url}/cards/${data}/likes`, {
+            method: 'PUT',
+            headers: this._headers,
+            body: JSON.stringify({data})
+        })
+            .then (this._handleResponse);
+    }
+
+    deleteLike(data) {
+        return fetch(`${this._url}/cards/${data}/likes`, {
+            method: 'DELETE',
+            headers: this._headers,
+            body: JSON.stringify({data})
+        })
+            .then (this._handleResponse);
+    }
 }

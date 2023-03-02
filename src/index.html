@@ -15,7 +15,7 @@
         
         <section class="profile">
             <div class="profile__bio">
-                <img src="" alt="Автарка профиля" class="profile__photo">
+                <img src="#" alt="Автарка профиля" class="profile__photo">
     
                 <div class="profile__info">
                     <h1 class="profile__name"></h1>
@@ -119,7 +119,7 @@
             </div>
         </div>
     </section>
-
+    <!-- картинка на весь экран -->
     <section class="image-full">
         <div class="popup popup_image-full">
 
@@ -131,6 +131,25 @@
                 <img class="popup__image">
                 <figcaption class="popup__figcaption"></figcaption>
             </figure>
+
+        </div>
+    </section>
+
+
+    <!-- попап удаления карточки -->
+    <section class="delete-popup">
+        <div class="popup popup_delete">
+
+            <div class="popup__container">
+                <button type="button" class="popup__close">
+                    <img src="<%=require('./images/close-icon.svg')%>" alt="Закрыть окно" class="popup__close-icon">
+                </button>
+                <h2 class="popup__heading">Вы уверены?</h2>
+
+                <form action="./pages/index.js" method="get" class="popup__form" novalidate>
+                    <button class="popup__save">Да</button>
+                </form>
+            </div>
 
         </div>
     </section>

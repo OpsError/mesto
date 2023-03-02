@@ -25,7 +25,6 @@ export default class PopupWithForm extends Popup {
             this._list = this._getInputValues();
             this._handleSubmitForm({
                 name: this._list.title,
-                //в link проблема. надо решить
                 link: this._list.about});
         });
         super.setEventListeners();

@@ -6,10 +6,11 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+import PopupDelete from '../components/PopupDelete.js';
 
 import { validationConfig, formAddCard, formEditProfile, popupAdd, popupEdit, buttonAdd, buttonEdit, nameInputAdd, nameInputEdit, srcInputAdd, jobInputEdit,
-profileName, profileDescription, profilePhoto} from '../utils/utils.js';
-import { openImage, createCard } from '../utils/utils.js';
+profileName, profileDescription, profilePhoto, popupDelete, openImage} from '../utils/utils.js';
+// import { createCard } from '../utils/utils.js';
 
 // Валидация
 const formAddValidation = new FormValidator(validationConfig, formAddCard.querySelector('.popup__form'));
@@ -23,67 +24,109 @@ const api = new Api({
         authorization: '11c262d9-4172-458c-924e-d3009da526d4',
         'Content-type': 'application/json'
     }
-});
-
-//при загрузке страницы имя и описание с сервера
-api.getInfo()
-    .then ((res) => {
-        profileName.textContent = res.name;
-        profileDescription.textContent = res.about;
-        profilePhoto.src = res.avatar;
-        console.log(res);
-    });
-
-
-const popupAddCard = new PopupWithForm(popupAdd, ({name, link}) => {
-    api.postCard({name, link})
-        .then ((res) => {
-            const cardTemplate = createCard(res);
-            console.log(cardTemplate);
-            const card = new Section({
-                items: res,
-                renderer:  (element) => {
-                    const cardTemplate = createCard(element);
-                    card.addItem(cardTemplate);
-                }
-            }, '.elements');
-            card.addItem(cardTemplate);
-
-            popupAddCard.close();
-        });
-});
-popupAddCard.setEventListeners();
+  });
 
 const infoUser = new UserInfo({
     title: profileName,
     about: profileDescription
 });
 
+let userId;
+let cardElement;
+//получение информации пользователя и карточек с сервера
+Promise.all([api.getInfo(), api.getCard()])
+  .then((res) => {
+    const userData = res[0];
+    const cardsData = res[1];
+    
+    userId = userData._id;
+    cardElement = cardsData;
 
+    infoUser.setUserInfo({
+        name: userData.name,
+        about: userData.about
+    });
+    infoUser.setAvatar(userData.avatar);
+
+    cardRender.renderItems(cardsData);
+  });
+
+//добавление новой карточки
+const popupAddCard = new PopupWithForm(popupAdd, ({name, link}) => {
+    api.postCard({name, link})
+        .then ((res) => {
+            renderCard(res);
+            console.log(res);
+            popupAddCard.close();
+        });
+});
+popupAddCard.setEventListeners();
+
+//функция поставить/удалить лайк
+function putLike (card, cardId) {
+ if (card.checkLike()) {
+    console.log(card.checkLike());
+    api.deleteLike(cardId)
+        .then ((res) => {
+            card.getLikes(res.likes);
+            card.toggleLike();
+        });
+ } else {
+    console.log(card.checkLike());
+    api.putLike(cardId)
+        .then ((res) => {
+            card.getLikes(res.likes);
+            card.toggleLike();
+        });
+ }
+}
+
+// функция рендера карточек
+function renderCard (element) {
+    const card = new Card(element, '#element', userId, {openDeleteWindow}, openImage, handleLikeCard);
+    card.checkId(userId);
+    card.deleteWindow();
+
+    function handleLikeCard () {
+        putLike(card, element._id);
+    }
+
+    // удаление карточки с сервера
+    const openDeletePopup = new PopupDelete(popupDelete, () => {
+        api.deleteCard(element._id)
+            .then (() => {
+                card.deleteCard();
+                openDeletePopup.close();
+            });
+    });
+
+    // ф-ция открытия попапа и навешивание слушателей
+    function openDeleteWindow() {
+        openDeletePopup.open();
+        openDeletePopup.setEventListeners();
+    }
+
+    const cardElement = card.generateCard();
+    cardRender.addItem(cardElement);
+}
+
+// рендер карточек
+const cardRender = new Section( renderCard, '.elements');
+
+// изменить имя и описание профиля
 const popupEditProfile = new PopupWithForm(popupEdit, ({name, link}) => {
     api.patchInfo({name, link})
         .then ((res) => {
             console.log(res);
-            infoUser.setUserInfo(res.name, res.about);
+            infoUser.setUserInfo({
+                name: res.name,
+                about: res.about
+            });
             popupEditProfile.close();
         });
 });
 
 popupEditProfile.setEventListeners();
-
-
-//Отрисовка дефолтных карточек
-api.getCard()
-    .then ((res) => {
-        const card = new Section({
-            items: res,
-            renderer:  (element) => {
-                const cardTemplate = createCard(element);
-                card.addItem(cardTemplate);
-            }
-        }, '.elements');
-        card.renderItems();
-    });
 
 //слушатель кнопки добавить
 buttonAdd.addEventListener('click', () => {
