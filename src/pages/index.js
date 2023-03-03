@@ -7,16 +7,20 @@ import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import PopupDelete from '../components/PopupDelete.js';
+import PopupAvatar from '../components/PopupAvatar.js';
 
-import { validationConfig, formAddCard, formEditProfile, popupAdd, popupEdit, buttonAdd, buttonEdit, nameInputAdd, nameInputEdit, srcInputAdd, jobInputEdit,
-profileName, profileDescription, profilePhoto, popupDelete, openImage} from '../utils/utils.js';
-// import { createCard } from '../utils/utils.js';
+import { validationConfig, formAddCard, formEditProfile, formPatchAvatar, 
+    popupAdd, popupEdit, popupEditAvatar, buttonAvatar, buttonAdd, buttonEdit, 
+    nameInputAdd, nameInputEdit, srcInputAdd, jobInputEdit, profileName, 
+    profileDescription, avatarInputEdit, popupDelete, openImage} from '../utils/utils.js';
 
 // Валидация
 const formAddValidation = new FormValidator(validationConfig, formAddCard.querySelector('.popup__form'));
 const formEditValidation = new FormValidator(validationConfig, formEditProfile.querySelector('.popup__form'));
+const formEditAvatarValidation = new FormValidator(validationConfig, formPatchAvatar.querySelector('.popup__form'));
 formAddValidation.enableValidation();
 formEditValidation.enableValidation();
+formEditAvatarValidation.enableValidation();
 
 const api = new Api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-60',
@@ -128,12 +132,22 @@ const popupEditProfile = new PopupWithForm(popupEdit, ({name, link}) => {
 
 popupEditProfile.setEventListeners();
 
+const popupAvatarEdit = new PopupAvatar(popupEditAvatar, (url) => {
+    api.patchAvatar(url)
+        .then ((res) => {
+            infoUser.setAvatar(res.avatar);
+            popupAvatarEdit.close();
+        });
+});
+
 //слушатель кнопки добавить
 buttonAdd.addEventListener('click', () => {
     popupAddCard.open();
+    formAddValidation.cleanErrorMessage(nameInputAdd);
+    formAddValidation.cleanErrorMessage(srcInputAdd);
     nameInputAdd.value = '';
     srcInputAdd.value = '';
-    formAddValidation.blockButtonSave(popupAdd);
+    formAddValidation.blockButtonSave();
 });
 
 //слушатель кнопки редактирования
@@ -141,5 +155,16 @@ buttonEdit.addEventListener('click', () => {
     const infoFromPage = infoUser.getUserInfo();
     nameInputEdit.value = infoFromPage.name;
     jobInputEdit.value = infoFromPage.about;
+    formEditValidation.cleanErrorMessage(nameInputEdit);
+    formEditValidation.cleanErrorMessage(jobInputEdit);
     popupEditProfile.open();
+});
+
+// слушатель кнопки изменить аватарку
+buttonAvatar.addEventListener('click', () => {
+    popupAvatarEdit.open();
+    formEditAvatarValidation.cleanErrorMessage(avatarInputEdit);
+    avatarInputEdit.value = '';
+    popupAvatarEdit.setEventListeners();
+    formEditAvatarValidation.blockButtonSave();
 });

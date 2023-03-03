@@ -1,5 +1,7 @@
 .profile__info{
     display: grid;
+    margin: 0 0 0 30px;
+    box-sizing: border-box;
     grid-template-columns: 1fr 24px;
     grid-row-gap: 16px;
     grid-column-gap: 18px;
@@ -13,6 +15,6 @@
         grid-row-gap: 8px;
         grid-column-gap: 10px;
         text-align: center;
-        margin-top: 28px;
+        margin: 28px 0 0;
     }
 }

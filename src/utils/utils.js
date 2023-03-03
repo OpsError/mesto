@@ -1,17 +1,16 @@
-import Card from "../components/Card.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import Popup from "../components/Popup.js";
-import PopupDelete from "../components/PopupDelete.js";
   
 const page = document.querySelector('.page');
   
 export const formEditProfile = page.querySelector('.form-edit');
 export const formAddCard = page.querySelector('.form-add');
-export const imageFull = document.querySelector('.popup_image-full');
-const windowDelete = document.querySelector('.delete-popup');
+export const imageFull = page.querySelector('.popup_image-full');
+const windowDelete = page.querySelector('.delete-popup');
+export const formPatchAvatar = page.querySelector('.patch-avatar')
   
 export const buttonEdit = page.querySelector('.profile__edit-button');
 export const buttonAdd = page.querySelector('.profile__add-button');
+export const buttonAvatar = page.querySelector('.profile__edit-avatar');
 export const profileName = page.querySelector('.profile__name');
 export const profileDescription = page.querySelector('.profile__description');
 export const profilePhoto = page.querySelector('.profile__photo');
@@ -19,6 +18,9 @@ export const profilePhoto = page.querySelector('.profile__photo');
 export const popupEdit = formEditProfile.querySelector('.popup');
 export const nameInputEdit = formEditProfile.querySelector('.popup__input_type_name');
 export const jobInputEdit = formEditProfile.querySelector('.popup__input_type_description');
+
+export const popupEditAvatar = formPatchAvatar.querySelector('.popup');
+export const avatarInputEdit = formPatchAvatar.querySelector('.popup__input_type_url');
   
 export const popupAdd = formAddCard.querySelector('.popup');
 export const nameInputAdd = formAddCard.querySelector('.popup__input_type_title');
@@ -45,13 +47,3 @@ popupImageObject.setEventListeners();
 export function openImage ({link, name}) {
   popupImageObject.open(name, link);
 }
-
-//создание карточки
-// export function createCard(element, userId, openDeleteWindow) {
-//   const elementCard = new Card(element, '#element', {openDeleteWindow}, {openImage});
-//   elementCard.checkId(userId);
-//   elementCard.deleteCard();
-//   const cardTemplate = elementCard.generateCard();
-
-//   return cardTemplate;
-// }

@@ -15,8 +15,13 @@
         
         <section class="profile">
             <div class="profile__bio">
-                <img src="#" alt="Автарка профиля" class="profile__photo">
-    
+                <div class="profile__avatar">
+                    <img src="#" alt="Автарка профиля" class="profile__photo">
+                    <button class="profile__edit-avatar">
+                        <img src="<%=require('./images/edit-avatar.svg')%>" alt="" class="profile__avatar-button">
+                    </button>
+                </div>
+
                 <div class="profile__info">
                     <h1 class="profile__name"></h1>
                     <button type="button" class="profile__edit-button">
@@ -146,12 +151,35 @@
                 </button>
                 <h2 class="popup__heading">Вы уверены?</h2>
 
-                <form action="./pages/index.js" method="get" class="popup__form" novalidate>
-                    <button class="popup__save">Да</button>
+                <form action="./pages/index.js" method="get" class="popup__form popup__form_type_delete" novalidate>
+                    <button class="popup__save popup__save_type_delete">Да</button>
                 </form>
             </div>
 
         </div>
+    </section>
+
+
+    <!-- попап обновить аву -->
+    <section class="patch-avatar">
+        <div class="popup popup_patch">
+
+        <div class="popup__container">
+            <button type="button" class="popup__close">
+                <img src="<%=require('./images/close-icon.svg')%>" alt="Закрыть окно" class="popup__close-icon">
+            </button>
+            <h2 class="popup__heading">Обновить аватар</h2>
+
+            <form action="./pages/index.js" method="get" class="popup__form popup__form_type_patch" novalidate>
+
+                <input type="url" name="link" id="url-input" required value="" placeholder="Ссылка на картинку" class="popup__input popup__input_type_url">
+
+                <span class="url-input-error"></span>
+
+                <button class="popup__save">Сохранить</button>
+            </form>
+        </div>
+
     </section>
 </body>
 </html>

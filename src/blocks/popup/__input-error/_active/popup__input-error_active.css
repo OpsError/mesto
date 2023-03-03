@@ -9,6 +9,6 @@
     color: #ff0000;
 }
 
-.popup__input-error_active:last-of-type{
+.popup__input-error_active:nth-of-type(even){
     margin-top: 89px;
 }

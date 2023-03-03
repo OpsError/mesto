@@ -63,8 +63,14 @@ export default class FormValidator {
         });
       }
 
+    cleanErrorMessage(inputElement) {
+      const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+      errorElement.textContent = '';
+      inputElement.classList.remove(this._config.inputErrorClass);
+    }
+
     //заблокировать кнопку при открытии попапа
-    blockButtonSave(popup) {
+    blockButtonSave() {
         this._buttonElement.classList.add('popup__save_inactive');
         this._buttonElement.disabled = true;
     }
