@@ -12,7 +12,8 @@ import PopupAvatar from '../components/PopupAvatar.js';
 import { validationConfig, formAddCard, formEditProfile, formPatchAvatar, 
     popupAdd, popupEdit, popupEditAvatar, buttonAvatar, buttonAdd, buttonEdit, 
     nameInputAdd, nameInputEdit, srcInputAdd, jobInputEdit, profileName, 
-    profileDescription, avatarInputEdit, popupDelete, openImage} from '../utils/utils.js';
+    profileDescription, avatarInputEdit, popupDelete, openImage,
+    buttonSubmitAvatar, buttonSubmitProfile} from '../utils/utils.js';
 
 // Валидация
 const formAddValidation = new FormValidator(validationConfig, formAddCard.querySelector('.popup__form'));
@@ -62,6 +63,9 @@ const popupAddCard = new PopupWithForm(popupAdd, ({name, link}) => {
             renderCard(res);
             console.log(res);
             popupAddCard.close();
+        })
+        .catch ((res) => {
+            console.log(res);
         });
 });
 popupAddCard.setEventListeners();
@@ -74,6 +78,9 @@ function putLike (card, cardId) {
         .then ((res) => {
             card.getLikes(res.likes);
             card.toggleLike();
+        })
+        .catch ((res) => {
+            console.log(res);
         });
  } else {
     console.log(card.checkLike());
@@ -81,6 +88,9 @@ function putLike (card, cardId) {
         .then ((res) => {
             card.getLikes(res.likes);
             card.toggleLike();
+        })
+        .catch ((res) => {
+            console.log(res);
         });
  }
 }
@@ -101,6 +111,9 @@ function renderCard (element) {
             .then (() => {
                 card.deleteCard();
                 openDeletePopup.close();
+            })
+            .catch ((res) => {
+                console.log(res);
             });
     });
 
@@ -119,6 +132,7 @@ const cardRender = new Section( renderCard, '.elements');
 
 // изменить имя и описание профиля
 const popupEditProfile = new PopupWithForm(popupEdit, ({name, link}) => {
+    buttonSubmitProfile.textContent = 'Сохранение...';
     api.patchInfo({name, link})
         .then ((res) => {
             console.log(res);
@@ -127,16 +141,23 @@ const popupEditProfile = new PopupWithForm(popupEdit, ({name, link}) => {
                 about: res.about
             });
             popupEditProfile.close();
+        })
+        .catch ((res) => {
+            console.log(res);
         });
 });
 
 popupEditProfile.setEventListeners();
 
 const popupAvatarEdit = new PopupAvatar(popupEditAvatar, (url) => {
+    buttonSubmitAvatar.textContent = 'Сохранение...'
     api.patchAvatar(url)
         .then ((res) => {
             infoUser.setAvatar(res.avatar);
             popupAvatarEdit.close();
+        })
+        .catch ((res) => {
+            console.log(res);
         });
 });
 
@@ -157,11 +178,13 @@ buttonEdit.addEventListener('click', () => {
     jobInputEdit.value = infoFromPage.about;
     formEditValidation.cleanErrorMessage(nameInputEdit);
     formEditValidation.cleanErrorMessage(jobInputEdit);
+    buttonSubmitProfile.textContent = 'Сохранить';
     popupEditProfile.open();
 });
 
 // слушатель кнопки изменить аватарку
 buttonAvatar.addEventListener('click', () => {
+    buttonSubmitAvatar.textContent = 'Сохранить';
     popupAvatarEdit.open();
     formEditAvatarValidation.cleanErrorMessage(avatarInputEdit);
     avatarInputEdit.value = '';

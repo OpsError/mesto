@@ -66,6 +66,7 @@ export default class Card {
     }
 
     deleteCard() {
+        console.log(this._element);
         this._element.remove();
         this._element = null;
     }

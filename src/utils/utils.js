@@ -18,9 +18,11 @@ export const profilePhoto = page.querySelector('.profile__photo');
 export const popupEdit = formEditProfile.querySelector('.popup');
 export const nameInputEdit = formEditProfile.querySelector('.popup__input_type_name');
 export const jobInputEdit = formEditProfile.querySelector('.popup__input_type_description');
+export const buttonSubmitProfile = formEditProfile.querySelector('.popup__save');
 
 export const popupEditAvatar = formPatchAvatar.querySelector('.popup');
 export const avatarInputEdit = formPatchAvatar.querySelector('.popup__input_type_url');
+export const buttonSubmitAvatar = formPatchAvatar.querySelector('.popup__save');
   
 export const popupAdd = formAddCard.querySelector('.popup');
 export const nameInputAdd = formAddCard.querySelector('.popup__input_type_title');
