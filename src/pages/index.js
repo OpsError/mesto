@@ -179,6 +179,7 @@ buttonEdit.addEventListener('click', () => {
     formEditValidation.cleanErrorMessage(nameInputEdit);
     formEditValidation.cleanErrorMessage(jobInputEdit);
     buttonSubmitProfile.textContent = 'Сохранить';
+    formEditValidation.blockButtonSave();
     popupEditProfile.open();
 });
 
