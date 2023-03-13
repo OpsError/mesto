@@ -29,10 +29,11 @@ export default class Card {
     //установщик событий
     _setEventListeners() {
         const buttonLike = this._element.querySelector('.element__like');
+        console.log(this._data);
 
         //лайк
         buttonLike.addEventListener('click', () => {
-            this._handleLikeCard();
+            this._handleLikeCard(this._data._id);
         });
 
         //открыть окно удаления

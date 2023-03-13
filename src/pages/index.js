@@ -101,12 +101,17 @@ function renderCard (element) {
     card.checkId(userId);
     card.deleteWindow();
 
-    function handleLikeCard () {
-        putLike(card, element._id);
+    function handleLikeCard (id) {
+        putLike(card, id);
+    }
+
+    function handleSubmitFormDelete () {
+        
     }
 
     // удаление карточки с сервера
-    const openDeletePopup = new PopupDelete(popupDelete, () => {
+    const openDeletePopup = new PopupDelete(popupDelete, (evt) => {
+        evt.preventDefault();
         api.deleteCard(element._id)
             .then (() => {
                 card.deleteCard();

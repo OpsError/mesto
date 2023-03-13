@@ -3,23 +3,24 @@ import Popup from "./Popup.js";
 export default class PopupDelete extends Popup {
     constructor (popup, handleSubmitFormDelete) {
         super(popup);
-        // this._element = element;
         this._handleSubmitFormDelete = handleSubmitFormDelete;
+        // this._cardId = cardId;
         this._formDelete = popup.querySelector('.popup__form');
+        // this._formSubmit = popup.querySelector('.popup__form');
+    }
+
+    _deleteCard() {
+        this._handleSubmitFormDelete();
     }
 
     //слушатели
     setEventListeners() {
-        this._formDelete.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-            this._handleSubmitFormDelete();
-        });
         super.setEventListeners();
+        this._formDelete.addEventListener('submit', this._handleSubmitFormDelete);
     }
 
-    // deleteCardTemplation() {
-    //     this._element._element.remove();
-    //     this._element._element = null;
-    //     super.close();
-    // }
+    close() {
+        super.close();
+        this._formDelete.removeEventListener('submit', this._handleSubmitFormDelete);
+    }
 }
