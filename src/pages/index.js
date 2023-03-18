@@ -93,8 +93,6 @@ function putLike (card, cardId) {
  }
 }
 
-const openDeletePopup = new PopupDelete(popupDelete);
-
 // функция рендера карточек
 function renderCard (element) {
     const card = new Card(element, '#element', userId, {openDeleteWindow}, openImage, handleLikeCard);
@@ -104,15 +102,8 @@ function renderCard (element) {
     function handleLikeCard (id) {
         putLike(card, id);
     }
-
-    // ф-ция открытия попапа и навешивание слушателей
-    function openDeleteWindow() {
-        openDeletePopup.open();
-        openDeletePopup.setEventListeners();
-    }
-
     // удаление карточки с сервера
-    openDeletePopup.setHandleSubmitFormDelete ((evt) => {
+    const openDeletePopup = new PopupDelete(popupDelete, (evt) => {
         evt.preventDefault();
         api.deleteCard(element._id)
             .then (() => {
@@ -122,8 +113,13 @@ function renderCard (element) {
             .catch ((res) => {
                 console.log(res);
             });
-        }
-    );
+        });
+
+    // ф-ция открытия попапа и навешивание слушателей
+    function openDeleteWindow() {
+        openDeletePopup.open();
+        openDeletePopup.setEventListeners();
+    }
 
     const cardElement = card.generateCard();
     cardRender.addItem(cardElement);
@@ -165,7 +161,6 @@ const popupAvatarEdit = new PopupAvatar(popupEditAvatar, (url) => {
 
 //слушатель кнопки добавить
 buttonAdd.addEventListener('click', () => {
-    popupAddCard.setEventListeners();
     popupAddCard.open();
     formAddValidation.cleanErrorMessage(nameInputAdd);
     formAddValidation.cleanErrorMessage(srcInputAdd);
@@ -184,7 +179,6 @@ buttonEdit.addEventListener('click', () => {
     buttonSubmitProfile.textContent = 'Сохранить';
     formEditValidation.blockButtonSave();
     popupEditProfile.open();
-    popupEditProfile.setEventListeners();
 });
 
 // слушатель кнопки изменить аватарку
