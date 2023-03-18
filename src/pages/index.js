@@ -95,6 +95,8 @@ function putLike (card, cardId) {
  }
 }
 
+const openDeletePopup = new PopupDelete(popupDelete);
+
 // функция рендера карточек
 function renderCard (element) {
     const card = new Card(element, '#element', userId, {openDeleteWindow}, openImage, handleLikeCard);
@@ -105,22 +107,19 @@ function renderCard (element) {
         putLike(card, id);
     }
 
-    function handleSubmitFormDelete () {
-        
-    }
-
     // удаление карточки с сервера
-    const openDeletePopup = new PopupDelete(popupDelete, (evt) => {
-        evt.preventDefault();
-        api.deleteCard(element._id)
-            .then (() => {
-                card.deleteCard();
-                openDeletePopup.close();
-            })
-            .catch ((res) => {
-                console.log(res);
-            });
-    });
+    openDeletePopup.setHandleSubmitFormDelete ((evt) => {
+            evt.preventDefault();
+            api.deleteCard(element._id)
+                .then (() => {
+                    card.deleteCard();
+                    openDeletePopup.close();
+                })
+                .catch ((res) => {
+                    console.log(res);
+                });
+        }
+    );
 
     // ф-ция открытия попапа и навешивание слушателей
     function openDeleteWindow() {

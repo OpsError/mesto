@@ -1,12 +1,13 @@
 import Popup from "./Popup.js";
 
 export default class PopupDelete extends Popup {
-    constructor (popup, handleSubmitFormDelete) {
+    constructor (popup) {
         super(popup);
-        this._handleSubmitFormDelete = handleSubmitFormDelete;
-        // this._cardId = cardId;
         this._formDelete = popup.querySelector('.popup__form');
-        // this._formSubmit = popup.querySelector('.popup__form');
+    }
+
+    setHandleSubmitFormDelete(handleSubmitFormDelete) {
+        this._handleSubmitFormDelete = handleSubmitFormDelete;
     }
 
     _deleteCard() {
