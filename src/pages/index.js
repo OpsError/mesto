@@ -37,7 +37,6 @@ const infoUser = new UserInfo({
 });
 
 let userId;
-let cardElement;
 //получение информации пользователя и карточек с сервера
 Promise.all([api.getInfo(), api.getCard()])
   .then((res) => {
@@ -45,7 +44,6 @@ Promise.all([api.getInfo(), api.getCard()])
     const cardsData = res[1];
     
     userId = userData._id;
-    cardElement = cardsData;
 
     infoUser.setUserInfo({
         name: userData.name,
@@ -107,25 +105,25 @@ function renderCard (element) {
         putLike(card, id);
     }
 
-    // удаление карточки с сервера
-    openDeletePopup.setHandleSubmitFormDelete ((evt) => {
-            evt.preventDefault();
-            api.deleteCard(element._id)
-                .then (() => {
-                    card.deleteCard();
-                    openDeletePopup.close();
-                })
-                .catch ((res) => {
-                    console.log(res);
-                });
-        }
-    );
-
     // ф-ция открытия попапа и навешивание слушателей
     function openDeleteWindow() {
         openDeletePopup.open();
         openDeletePopup.setEventListeners();
     }
+
+    // удаление карточки с сервера
+    openDeletePopup.setHandleSubmitFormDelete ((evt) => {
+        evt.preventDefault();
+        api.deleteCard(element._id)
+            .then (() => {
+                card.deleteCard();
+                openDeletePopup.close();
+            })
+            .catch ((res) => {
+                console.log(res);
+            });
+        }
+    );
 
     const cardElement = card.generateCard();
     cardRender.addItem(cardElement);
