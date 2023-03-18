@@ -165,6 +165,7 @@ const popupAvatarEdit = new PopupAvatar(popupEditAvatar, (url) => {
 
 //слушатель кнопки добавить
 buttonAdd.addEventListener('click', () => {
+    popupAddCard.setEventListeners();
     popupAddCard.open();
     formAddValidation.cleanErrorMessage(nameInputAdd);
     formAddValidation.cleanErrorMessage(srcInputAdd);
@@ -183,6 +184,7 @@ buttonEdit.addEventListener('click', () => {
     buttonSubmitProfile.textContent = 'Сохранить';
     formEditValidation.blockButtonSave();
     popupEditProfile.open();
+    popupEditProfile.setEventListeners();
 });
 
 // слушатель кнопки изменить аватарку
