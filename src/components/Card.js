@@ -38,7 +38,8 @@ export default class Card {
 
         //открыть окно удаления
         this._buttonTrash.addEventListener('click', () => {
-            this._openDeleteWindow(this._element._element, this._data._id);
+            console.log(this._data._id);
+            this._openDeleteWindow(this._data._id);
         });
 
         //открыть фотографию

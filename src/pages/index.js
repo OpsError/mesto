@@ -7,13 +7,12 @@ import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import PopupDelete from '../components/PopupDelete.js';
-import PopupAvatar from '../components/PopupAvatar.js';
 
 import { validationConfig, formAddCard, formEditProfile, formPatchAvatar, 
     popupAdd, popupEdit, popupEditAvatar, buttonAvatar, buttonAdd, buttonEdit, 
     nameInputAdd, nameInputEdit, srcInputAdd, jobInputEdit, profileName, 
     profileDescription, avatarInputEdit, popupDelete, openImage,
-    buttonSubmitAvatar, buttonSubmitProfile} from '../utils/utils.js';
+    buttonSubmitAvatar, buttonSubmitProfile, buttonSubmitCard} from '../utils/utils.js';
 
 // Валидация
 const formAddValidation = new FormValidator(validationConfig, formAddCard.querySelector('.popup__form'));
@@ -56,6 +55,7 @@ Promise.all([api.getInfo(), api.getCard()])
 
 //добавление новой карточки
 const popupAddCard = new PopupWithForm(popupAdd, ({name, link}) => {
+    buttonSubmitCard.textContent = 'Сохранение...';
     api.postCard({name, link})
         .then ((res) => {
             renderCard(res);
@@ -64,6 +64,9 @@ const popupAddCard = new PopupWithForm(popupAdd, ({name, link}) => {
         })
         .catch ((res) => {
             console.log(res);
+        })
+        .finally(() => {
+            buttonSubmitCard.textContent = 'Создать';
         });
 });
 popupAddCard.setEventListeners();
@@ -93,6 +96,9 @@ function putLike (card, cardId) {
  }
 }
 
+const openDeletePopup = new PopupDelete(popupDelete);
+openDeletePopup.setEventListeners();
+
 // функция рендера карточек
 function renderCard (element) {
     const card = new Card(element, '#element', userId, {openDeleteWindow}, openImage, handleLikeCard);
@@ -102,23 +108,21 @@ function renderCard (element) {
     function handleLikeCard (id) {
         putLike(card, id);
     }
-    // удаление карточки с сервера
-    const openDeletePopup = new PopupDelete(popupDelete, (evt) => {
-        evt.preventDefault();
-        api.deleteCard(element._id)
-            .then (() => {
-                card.deleteCard();
-                openDeletePopup.close();
-            })
-            .catch ((res) => {
-                console.log(res);
-            });
-        });
 
-    // ф-ция открытия попапа и навешивание слушателей
-    function openDeleteWindow() {
-        openDeletePopup.open();
-        openDeletePopup.setEventListeners();
+    // ф-ция открытия попапа и колбэк для удаления карточки
+    function openDeleteWindow(id) {
+
+        openDeletePopup.open( (evt) => {
+            evt.preventDefault();
+            api.deleteCard(id)
+                .then (() => {
+                    card.deleteCard();
+                    openDeletePopup.close();
+                })
+                .catch ((res) => {
+                    console.log(res);
+                });
+        });
     }
 
     const cardElement = card.generateCard();
@@ -142,22 +146,28 @@ const popupEditProfile = new PopupWithForm(popupEdit, ({name, link}) => {
         })
         .catch ((res) => {
             console.log(res);
+        })
+        .finally (() => {
+            buttonSubmitProfile.textContent = 'Сохранить';
         });
 });
-
 popupEditProfile.setEventListeners();
 
-const popupAvatarEdit = new PopupAvatar(popupEditAvatar, (url) => {
+const popupAvatarEdit = new PopupWithForm(popupEditAvatar, (data) => {
     buttonSubmitAvatar.textContent = 'Сохранение...'
-    api.patchAvatar(url)
+    api.patchAvatar(data.link)
         .then ((res) => {
             infoUser.setAvatar(res.avatar);
             popupAvatarEdit.close();
         })
         .catch ((res) => {
             console.log(res);
+        })
+        .finally (() => {
+            buttonSubmitAvatar.textContent = 'Сохранить';
         });
 });
+popupAvatarEdit.setEventListeners();
 
 //слушатель кнопки добавить
 buttonAdd.addEventListener('click', () => {
@@ -176,7 +186,6 @@ buttonEdit.addEventListener('click', () => {
     jobInputEdit.value = infoFromPage.about;
     formEditValidation.cleanErrorMessage(nameInputEdit);
     formEditValidation.cleanErrorMessage(jobInputEdit);
-    buttonSubmitProfile.textContent = 'Сохранить';
     formEditValidation.blockButtonSave();
     popupEditProfile.open();
 });
@@ -187,6 +196,5 @@ buttonAvatar.addEventListener('click', () => {
     popupAvatarEdit.open();
     formEditAvatarValidation.cleanErrorMessage(avatarInputEdit);
     avatarInputEdit.value = '';
-    popupAvatarEdit.setEventListeners();
     formEditAvatarValidation.blockButtonSave();
 });

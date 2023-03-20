@@ -27,6 +27,7 @@ export const buttonSubmitAvatar = formPatchAvatar.querySelector('.popup__save');
 export const popupAdd = formAddCard.querySelector('.popup');
 export const nameInputAdd = formAddCard.querySelector('.popup__input_type_title');
 export const srcInputAdd = formAddCard.querySelector('.popup__input_type_link');
+export const buttonSubmitCard = formAddCard.querySelector('.popup__save');
 
 export const popupDelete = windowDelete.querySelector('.popup');
 export const buttonDelete = windowDelete.querySelector('.popup__save');
